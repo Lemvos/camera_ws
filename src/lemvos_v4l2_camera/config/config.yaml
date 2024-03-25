@@ -1,0 +1,5 @@
+camera_node:
+  ros__parameters:
+    camera_name: "camera"
+    camera_info_url: ""
+    
