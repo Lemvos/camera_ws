@@ -1,0 +1,3 @@
+[submodule "src/ffmpeg_image_transport"]
+	path = src/ffmpeg_image_transport
+	url = git@github.com:Lemvos/ffmpeg_image_transport.git
