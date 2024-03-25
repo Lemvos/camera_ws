@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     python3-wstool \
     build-essential
 
+ENV VIDEO_DEVICE=/dev/video0
 # Install required Python packages
 #RUN pip3 install adafruit-circuitpython-bno08x
 
@@ -19,12 +20,9 @@ RUN apt-get install -y ros-humble-v4l2-camera
 # Create a catkin workspace
 RUN mkdir -p /workspace
 
-COPY .. /workspace
+COPY ./src /workspace/src
 
 WORKDIR /workspace
-
-RUN rm -rf /workspace/build\
-    && rm -rf /workspace/install
 
 # Install dependencies with rosdep
 RUN rosdep install --from-paths src --ignore-src -r -y
@@ -33,7 +31,7 @@ RUN rosdep install --from-paths src --ignore-src -r -y
 RUN /bin/bash -c '. /opt/ros/humble/setup.bash; colcon build'
 
 # Copy the startup script into the container
-COPY ../scripts /workspace/scripts/
+COPY scripts /workspace/scripts/
 
 # Make sure the script is executable
 RUN chmod +x /workspace/scripts/*.sh
